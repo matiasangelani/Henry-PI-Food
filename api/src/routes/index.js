@@ -1,12 +1,31 @@
-const { Router } = require('express');
+require("dotenv").config();
+const router = require("express").Router();
+const axios = require("axios").default;
+const { API_KEY } = process.env;
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
-
-const router = Router();
-
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.get("/", async (req, res) => {
+  try {
+    const { data } = await axios.get(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}`,
+      {
+        params: {
+          number: 9,
+        },
+      }
+    );
 
+    res.json(data);
+  } catch (error) {
+    res.json({ msg: error });
+  }
+});
 
-module.exports = router;
+module.exports = {
+  index: router,
+  recipes: require("./recipes"),
+  types: require("./types"),
+};
