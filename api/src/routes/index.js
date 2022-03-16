@@ -10,7 +10,7 @@ const { API_KEY } = process.env;
 router.get("/", async (req, res) => {
   try {
     const { data } = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}`,
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`,
       {
         params: {
           number: 9,
@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
       }
     );
 
-    res.json(data);
+    res.json(data.results);
   } catch (error) {
     res.json({ msg: error });
   }

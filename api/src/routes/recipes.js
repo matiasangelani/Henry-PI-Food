@@ -10,9 +10,10 @@ const { Recipe } = require("../db");
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res) => {
   const { name } = req.query;
+  const regExp = new RegExp(`${name}`, "ig");
   try {
     const { data } = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}`,
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`,
       {
         params: {
           number: 9,
@@ -21,19 +22,15 @@ router.get("/", async (req, res) => {
     );
 
     const recipesFilter = data.results.filter((r) => {
-      const find = r.title
-        .replace(/,/g, "")
-        .split(" ")
-        .find((r) => r.toLowerCase() === name.toLowerCase());
-
+      const find = regExp.test(r.title);
       if (find) return r;
     });
 
     !recipesFilter.length
-      ? res.json(`Does not exist recipe with the word ${name.toUpperCase()}`)
+      ? res.json([`Does not exist recipe with the word ${name.toUpperCase()}`])
       : res.json(recipesFilter);
   } catch (error) {
-    res.json({ msg: error });
+    res.json({ msg: "error in axios" });
   }
 });
 
