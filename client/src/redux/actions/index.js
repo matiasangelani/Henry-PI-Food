@@ -1,0 +1,69 @@
+import axios from "axios";
+export const GET_ALL_RECIPES = "GET_ALL_RECIPES";
+export const GET_SEARCH_RECIPES = "GET_SEARCH_RECIPES";
+export const ORDER_RECIPES_ASCENDING = "ORDER_RECIPES_ASCENDING";
+export const ORDER_RECIPES_DESCENDING = "ORDER_RECIPES_DESCENDING";
+export const ORDER_RECIPES_BY_HIGH_SCORE = "ORDER_RECIPES_BY_HIGH_SCORE";
+export const ORDER_RECIPES_BY_LOW_SCORE = "ORDER_RECIPES_BY_LOW_SCORE";
+export const FILTER_BY_DIET = "FILTER_BY_DIET";
+
+export const getAllRecipes = () => async (dispatch) => {
+  try {
+    const payload = await axios.get("http://localhost:3001/");
+
+    console.log(payload.data);
+    dispatch({
+      type: GET_ALL_RECIPES,
+      payload: payload.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSearchRecipes = (input) => async (dispatch) => {
+  try {
+    const payload = await axios.get(
+      `http://localhost:3001/recipes?name=${input}`
+    );
+
+    console.log(payload.data);
+    dispatch({
+      type: GET_SEARCH_RECIPES,
+      payload: payload.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const orderRecipesAscending = () => {
+  return {
+    type: ORDER_RECIPES_ASCENDING,
+  };
+};
+
+export const orderRecipesDescending = () => {
+  return {
+    type: ORDER_RECIPES_DESCENDING,
+  };
+};
+
+export const orderRecipesByHighScore = () => {
+  return {
+    type: ORDER_RECIPES_BY_HIGH_SCORE,
+  };
+};
+
+export const orderRecipesByLowScore = () => {
+  return {
+    type: ORDER_RECIPES_BY_LOW_SCORE,
+  };
+};
+
+export const filterByDiet = (filter) => {
+  return {
+    type: FILTER_BY_DIET,
+    payload: filter,
+  };
+};
