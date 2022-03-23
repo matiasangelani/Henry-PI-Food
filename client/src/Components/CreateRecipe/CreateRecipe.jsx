@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getDiets, postRecipe } from '../../redux/actions';
 
 const CreateRecipe = () => {
+  const regexOnlyLetterAndSpace = /^[a-zA-Z\s]*$/;
   const newRecipe = useSelector((state) => state.newRecipe);
   const typeDiets = useSelector((state) => state.typeDiets);
   const dispatch = useDispatch();
@@ -15,20 +16,15 @@ const CreateRecipe = () => {
     instructions: '',
     diets: [],
   });
+  const [error, setError] = useState({
+    errorTitle: '',
+    errorPoints: '',
+    errorHealthy: '',
+  });
 
   useEffect(() => {
     dispatch(getDiets());
   }, [dispatch]);
-
-  // const [error, setError] = useState({
-  //   errorTitle: '',
-  //   errorPoints: '',
-  //   errorHealthScore: '',
-  //   errorInstructions: [],
-  //   errorDiets: [],
-  // });
-
-  const regexOnlyLetter = /[a-zA-Z]\s+/;
 
   // const validateInput = (e) => {
   //   const successRegex = regexOnlyLetter.test(input.title);
@@ -36,7 +32,7 @@ const CreateRecipe = () => {
   //   successRegex ? handleOnChange(e) : setError('Invalid characters');
   // };
 
-  const handleOnChange = (e) => {
+  const handleOnChangeCheck = (e) => {
     if (e.target.checked) {
       setInput({
         ...input,
@@ -55,23 +51,69 @@ const CreateRecipe = () => {
     }
   };
 
+  const handleOnChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+
+    switch (e.target.name) {
+      case 'name':
+        if (!regexOnlyLetterAndSpace.test(e.target.value)) {
+          setError({
+            ...error,
+            errorTitle: 'Invalid Title',
+          });
+        } else {
+          setError({
+            ...error,
+            errorTitle: '',
+          });
+        }
+        break;
+      case 'points':
+        if (e.target.value < 0 || e.target.value > 100) {
+          setError({
+            ...error,
+            errorPoints: 'Invalid Points',
+          });
+        } else {
+          setError({
+            ...error,
+            errorPoints: '',
+          });
+        }
+        break;
+      case 'healthy':
+        if (e.target.value < 0 || e.target.value > 100) {
+          setError({
+            ...error,
+            errorHealthy: 'Invalid Healthy Level',
+          });
+        } else {
+          setError({
+            ...error,
+            errorHealthy: '',
+          });
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleOnSubmit = (e) => {
     //e.preventDefault();
     dispatch(postRecipe(input));
   };
-  // const border = {
-  //   border: 'red 1px solid',
-  // };
 
   console.log(input);
-  console.log('CreateRecipe', newRecipe);
-  console.log('Diets', typeDiets);
+  console.log(error);
 
   return (
     <form onSubmit={handleOnSubmit}>
       <input
         type='text'
-        // style={error && border}
         name='name'
         placeholder='Title'
         value={input.name}
@@ -113,14 +155,20 @@ const CreateRecipe = () => {
             type='checkbox'
             name={d.name}
             value={d.name}
-            onChange={handleOnChange}
+            onChange={handleOnChangeCheck}
           />
           {d.name}
-          <label htmlFor='vegetarian'></label>
+          <label htmlFor={d.name}></label>
         </div>
       ))}
 
-      <button type='submit'>Create</button>
+      {error.errorTitle || error.errorPoints || error.errorHealthy ? (
+        <button type='submit' disabled>
+          Create
+        </button>
+      ) : (
+        <button type='submit'>Create</button>
+      )}
     </form>
   );
 };
