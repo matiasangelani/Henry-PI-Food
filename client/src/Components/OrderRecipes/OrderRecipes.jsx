@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
+  //orderRecipesDefault,
   orderRecipesAscending,
   orderRecipesDescending,
   orderRecipesByHighScore,
@@ -25,7 +26,9 @@ const OrderRecipes = () => {
       ? dispatch(orderRecipesByHighScore())
       : value === "Low Score"
       ? dispatch(orderRecipesByLowScore())
-      : console.log("error");
+      : // : value === "Default"
+        // ? dispatch(orderRecipesDefault())
+        console.log("error");
   };
 
   //console.log(order);
@@ -35,6 +38,7 @@ const OrderRecipes = () => {
     <div>
       <div>Select an Order</div>
       <div>
+        {/* <div onClick={handleOnClick}>Default</div> */}
         <div onClick={handleOnClick}>Ascending</div>
         <div onClick={handleOnClick}>Descending</div>
         <div onClick={handleOnClick}>High Score</div>

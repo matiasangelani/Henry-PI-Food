@@ -1,16 +1,29 @@
-import { React, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllRecipes } from "../../redux/actions";
+import React from "react";
+import { useSelector } from "react-redux";
+//import { getAllRecipes } from "../../redux/actions";
 import Recipe from "../Recipe/Recipe";
-import Loading from "../Loading/Loading";
-import Search from "../Search/Search";
-import OrderRecipes from "../OrderRecipes/OrderRecipes";
-import FilterRecipes from "../FilterRecipes/FilterRecipes";
+// import Loading from "../Loading/Loading";
+// import Search from "../Search/Search";
+// import OrderRecipes from "../OrderRecipes/OrderRecipes";
+// import FilterRecipes from "../FilterRecipes/FilterRecipes";
+// import Pagination from "../Pagination/Pagination";
 
-const Recipes = () => {
-  const recipes = useSelector((state) => state.recipes);
-  const filterRecipes = useSelector((state) => state.filterRecipes);
-  const dispatch = useDispatch();
+const Recipes = ({ currentRecipes }) => {
+  const getRecipes = useSelector((state) => state.getRecipes);
+
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [recipesPerPage] = useState(9);
+  // const recipes = useSelector((state) => state.recipes);
+  // const dispatch = useDispatch();
+
+  // const indexOfLastRecipe = currentPage * recipesPerPage;
+  // const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  // const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+  // const paginate = (pageNumber, e) => {
+  //   e.preventDefault();
+  //   setCurrentPage(pageNumber);
+  // };
 
   // useEffect(() => {
   //   dispatch(getAllRecipes());
@@ -25,30 +38,35 @@ const Recipes = () => {
             <Recipe/>
             <Loading/>
          */}
-      {!recipes.length ? (
+      {/* {!getRecipes.length ? (
         <Loading />
-      ) : (
-        <>
-          <header>
+      ) : ( */}
+      <>
+        {/* <header>
             <Search />
           </header>
           <aside>
             <FilterRecipes />
           </aside>
           <section>
-            <OrderRecipes />
-            <p>Recipes</p>
-            {typeof recipes[0] !== "string" ? (
-              recipes.map((r) => <Recipe key={r.id} {...r} />)
-            ) : (
-              <p> {recipes[0]} </p>
-            )}
-            {filterRecipes.map((r) => (
+            <OrderRecipes /> */}
+        <p>Recipes</p>
+        {typeof getRecipes[0] !== "string" ? (
+          currentRecipes.map((r) => <Recipe key={r.id} {...r} />)
+        ) : (
+          <p> {getRecipes[0]} </p>
+        )}
+        {/* <Pagination
+              recipesPerPage={recipesPerPage}
+              totalRecipes={recipes.length}
+              paginate={paginate}
+            /> */}
+        {/* {filterRecipes.map((r) => (
               <Recipe key={r.id} {...r} />
-            ))}
-          </section>
-        </>
-      )}
+            ))} */}
+        {/* </section> */}
+      </>
+      {/* )} */}
     </>
   );
 };

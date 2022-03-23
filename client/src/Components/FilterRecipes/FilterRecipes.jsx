@@ -1,88 +1,125 @@
-import React from "react";
-import { filterByDiet } from "../../redux/actions";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useRef, useState } from 'react';
+import { filterByDiet } from '../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 const FilterRecipes = () => {
+  const [diets, setDiets] = useState({
+    // vegetarian: true,
+    // glutenFree: true,
+  });
   const dispatch = useDispatch();
+  const didMountRef = useRef(false);
 
-  const handleOnClick = (e) => {
-    console.log(e);
-    console.log(e.target.checked);
-    dispatch(filterByDiet([e.target.value]));
+  const handleOnChange = (e) => {
+    setDiets({
+      ...diets,
+      [e.target.value]: e.target.checked,
+    });
   };
 
-  {
-    /* 
-    gluten free, ketogenic, vegetarian, 
-    lacto ovo vegetarian, dairy free, pescatarian,fodmap friendly, whole 30*/
-  }
+  useEffect(() => {
+    //console.log(diets);
+    didMountRef.current
+      ? dispatch(filterByDiet(diets))
+      : (didMountRef.current = true);
+  }, [dispatch, diets]);
+
+  /*BOOLEANAS
+      vegetarian,
+      vegan,
+      glutenFree,
+      dairyFree */
+  /******************************************** */
+  /*ARRAY
+      lacto ovo vegetarian,
+      pescatarian,
+      paleolithic,
+      fodmap friendly,
+      primal,
+      whole 30,
+      ketogenic */
+
   return (
     <div>
       <div>Filter</div>
       <form>
         <input
-          type="checkbox"
-          name="diet1"
-          value="gluten free"
-          onClick={handleOnClick}
+          type='checkbox'
+          name='vegetarian'
+          value='vegetarian'
+          onChange={handleOnChange}
         />
-        <label htmlFor="diet1">Gluten Free</label>
+        <label htmlFor='vegetarian'>Vegetarian</label>
         <input
-          type="checkbox"
-          name="diet2"
-          value="ketogenic"
-          onClick={handleOnClick}
+          type='checkbox'
+          name='vegan'
+          value='vegan'
+          onChange={handleOnChange}
         />
-        <label htmlFor="diet2">Ketogenic</label>
+        <label htmlFor='vegan'>Vegan</label>
         <input
-          type="checkbox"
-          name="diet3"
-          value="vegetarian"
-          onClick={handleOnClick}
+          type='checkbox'
+          name='gluten free'
+          value='gluten free'
+          onChange={handleOnChange}
         />
-        <label htmlFor="diet3">Vegetarian</label>
+        <label htmlFor='gluten free'>Gluten Free</label>
         <input
-          type="checkbox"
-          name="diet4"
-          value="lacto ovo vegetarian"
-          onClick={handleOnClick}
+          type='checkbox'
+          name='dairy free'
+          value='dairy free'
+          onChange={handleOnChange}
         />
-        <label htmlFor="diet4">Lacto Ovo Vegetarian</label>
+        <label htmlFor='dairy free'>Dairy Free</label>
         <input
-          type="checkbox"
-          name="diet5"
-          value="vegan"
-          onClick={handleOnClick}
+          type='checkbox'
+          name='lacto ovo vegetarian'
+          value='lacto ovo vegetarian'
+          onChange={handleOnChange}
         />
-        <label htmlFor="diet5">Vegan</label>
+        <label htmlFor='lacto ovo vegetarian'>Lacto Ovo Vegetarian</label>
         <input
-          type="checkbox"
-          name="diet6"
-          value="pescatarian"
-          onClick={handleOnClick}
+          type='checkbox'
+          name='pescatarian'
+          value='pescatarian'
+          onChange={handleOnChange}
         />
-        <label htmlFor="diet6">Pescatarian</label>
+        <label htmlFor='pescatarian'>Pescatarian</label>
         <input
-          type="checkbox"
-          name="diet7"
-          value="paleolithic"
-          onClick={handleOnClick}
+          type='checkbox'
+          name='paleolithic'
+          value='paleolithic'
+          onChange={handleOnChange}
         />
-        <label htmlFor="diet7">Paleolithic</label>
+        <label htmlFor='paleolithic'>Paleolithic</label>
         <input
-          type="checkbox"
-          name="diet8"
-          value="fodmap friendly"
-          onClick={handleOnClick}
+          type='checkbox'
+          name='fodmap friendly'
+          value='fodmap friendly'
+          onChange={handleOnChange}
         />
-        <label htmlFor="diet8">Low FODMAP</label>
+        <label htmlFor='fodmap friendly'>Low FODMAP</label>
         <input
-          type="checkbox"
-          name="diet9"
-          value="whole 30"
-          onClick={handleOnClick}
+          type='checkbox'
+          name='primal'
+          value='primal'
+          onChange={handleOnChange}
         />
-        <label htmlFor="diet9">Whole 30</label>
+        <label htmlFor='primal'>Primal</label>
+        <input
+          type='checkbox'
+          name='whole 30'
+          value='whole 30'
+          onChange={handleOnChange}
+        />
+        <label htmlFor='whole 30'>Whole 30</label>
+        <input
+          type='checkbox'
+          name='ketogenic'
+          value='ketogenic'
+          onChange={handleOnChange}
+        />
+        <label htmlFor='ketogenic'>Ketogenic</label>
       </form>
     </div>
   );

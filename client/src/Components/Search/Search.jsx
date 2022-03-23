@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { getSearchRecipes } from "../../redux/actions";
 
@@ -7,6 +7,7 @@ const Search = () => {
     search: "",
   });
   const dispatch = useDispatch();
+  const didMountRef = useRef(false);
 
   const handleOnChange = (e) => {
     setInput({
@@ -17,7 +18,7 @@ const Search = () => {
   };
 
   // useEffect(() => {
-  //   return () => dispatch(getSearchRecipes(input.search));
+  //   didMountRef.current ? dispatch(getSearchRecipes(input.search)) : didMountRef.current =true
   // }, [dispatch, input]);
 
   return (
