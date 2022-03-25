@@ -1,12 +1,18 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
   //orderRecipesDefault,
   orderRecipesAscending,
   orderRecipesDescending,
   orderRecipesByHighScore,
   orderRecipesByLowScore,
-} from "../../redux/actions";
+} from '../../redux/actions';
+import {
+  ButtonOrder,
+  MenuOrder,
+  ListOrder,
+  ItemOrder,
+} from './OrderRecipesStyled';
 
 const OrderRecipes = () => {
   const dispatch = useDispatch();
@@ -18,33 +24,36 @@ const OrderRecipes = () => {
     // console.log(e.target.innerText);
     // console.log(value);
 
-    value === "Ascending"
+    value === 'Ascending'
       ? dispatch(orderRecipesAscending())
-      : value === "Descending"
+      : value === 'Descending'
       ? dispatch(orderRecipesDescending())
-      : value === "High Score"
+      : value === 'High Score'
       ? dispatch(orderRecipesByHighScore())
-      : value === "Low Score"
+      : value === 'Low Score'
       ? dispatch(orderRecipesByLowScore())
       : // : value === "Default"
         // ? dispatch(orderRecipesDefault())
-        console.log("error");
+        console.log('error');
   };
 
   //console.log(order);
   //console.log(orderRecipes);
 
   return (
-    <div>
-      <div>Select an Order</div>
-      <div>
-        {/* <div onClick={handleOnClick}>Default</div> */}
-        <div onClick={handleOnClick}>Ascending</div>
-        <div onClick={handleOnClick}>Descending</div>
-        <div onClick={handleOnClick}>High Score</div>
-        <div onClick={handleOnClick}>Low Score</div>
-      </div>
-    </div>
+    <MenuOrder>
+      <ListOrder>
+        <ItemOrder>
+          Select Order
+          <ListOrder>
+            <ItemOrder onClick={handleOnClick}>Ascending</ItemOrder>
+            <ItemOrder onClick={handleOnClick}>Descending</ItemOrder>
+            <ItemOrder onClick={handleOnClick}>High Score</ItemOrder>
+            <ItemOrder onClick={handleOnClick}>Low Score</ItemOrder>
+          </ListOrder>
+        </ItemOrder>
+      </ListOrder>
+    </MenuOrder>
   );
 };
 

@@ -1,12 +1,13 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 //import { getAllRecipes } from "../../redux/actions";
-import Recipe from "../Recipe/Recipe";
+import Recipe from '../Recipe/Recipe';
 // import Loading from "../Loading/Loading";
 // import Search from "../Search/Search";
 // import OrderRecipes from "../OrderRecipes/OrderRecipes";
 // import FilterRecipes from "../FilterRecipes/FilterRecipes";
 // import Pagination from "../Pagination/Pagination";
+import { TitleRecipes } from './RecipeStyled';
 
 const Recipes = ({ currentRecipes }) => {
   const getRecipes = useSelector((state) => state.getRecipes);
@@ -50,8 +51,8 @@ const Recipes = ({ currentRecipes }) => {
           </aside>
           <section>
             <OrderRecipes /> */}
-        <p>Recipes</p>
-        {typeof getRecipes[0] !== "string" ? (
+        {/* <TitleRecipes>Recipes</TitleRecipes> */}
+        {typeof getRecipes[0] !== 'string' ? (
           currentRecipes.map((r) => <Recipe key={r.id} {...r} />)
         ) : (
           <p> {getRecipes[0]} </p>

@@ -1,14 +1,24 @@
-import { React, useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getAllRecipes } from "../../redux/actions";
-import { Link } from "react-router-dom";
-import Loading from "../Loading/Loading";
-import Search from "../Search/Search";
-import FilterRecipes from "../FilterRecipes/FilterRecipes";
-import OrderRecipes from "../OrderRecipes/OrderRecipes";
-import Recipes from "../Recipes/Recipes";
-import Pagination from "../Pagination/Pagination";
-import CreateRecipe from "../CreateRecipe/CreateRecipe";
+import { React, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAllRecipes } from '../../redux/actions';
+import { Link } from 'react-router-dom';
+import Loading from '../Loading/Loading';
+import Search from '../Search/Search';
+import FilterRecipes from '../FilterRecipes/FilterRecipes';
+import OrderRecipes from '../OrderRecipes/OrderRecipes';
+import Recipes from '../Recipes/Recipes';
+import Pagination from '../Pagination/Pagination';
+import CreateRecipe from '../CreateRecipe/CreateRecipe';
+import {
+  HomeContainer,
+  Header,
+  AsideSectionContainer,
+  Aside,
+  Section,
+  Footer,
+  PaginationContainer,
+  ButtonCreate,
+} from './HomeStyled';
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,30 +41,32 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <>
-      <header>
+    <HomeContainer>
+      <Header>
         <Search />
-      </header>
-      <aside>
-        <FilterRecipes />
-      </aside>
-      <section>
-        <Link to={`/recipes/create`}>
-          <button> Create Recipe</button>
-        </Link>
+      </Header>
+      <Aside>
         <OrderRecipes />
+        <FilterRecipes />
+        <Link to={`/recipes/create`}>
+          <ButtonCreate> Create Recipe</ButtonCreate>
+        </Link>
+      </Aside>
+      <Section>
         {!getRecipes.length ? (
           <Loading />
         ) : (
           <Recipes currentRecipes={currentRecipes} />
         )}
-        <Pagination
-          recipesPerPage={recipesPerPage}
-          totalRecipes={recipes.length}
-          paginate={paginate}
-        />
-      </section>
-    </>
+        <PaginationContainer>
+          <Pagination
+            recipesPerPage={recipesPerPage}
+            totalRecipes={recipes.length}
+            paginate={paginate}
+          />
+        </PaginationContainer>
+      </Section>
+    </HomeContainer>
   );
 };
 

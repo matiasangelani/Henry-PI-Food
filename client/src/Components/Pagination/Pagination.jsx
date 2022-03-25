@@ -1,4 +1,10 @@
-import React from "react";
+import React from 'react';
+import {
+  PaginationNav,
+  NumberList,
+  NumberItem,
+  Number,
+} from './PaginationStyled';
 
 const Pagination = ({ recipesPerPage, totalRecipes, paginate }) => {
   const pageNumbers = [];
@@ -7,17 +13,17 @@ const Pagination = ({ recipesPerPage, totalRecipes, paginate }) => {
     pageNumbers.push(i);
 
   return (
-    <nav>
-      <ul>
+    <PaginationNav>
+      <NumberList>
         {pageNumbers.map((n) => (
-          <li key={n}>
-            <a href="/recipes" onClick={(e) => paginate(n, e)}>
+          <NumberItem key={n}>
+            <Number href='/recipes' onClick={(e) => paginate(n, e)}>
               {n}
-            </a>
-          </li>
+            </Number>
+          </NumberItem>
         ))}
-      </ul>
-    </nav>
+      </NumberList>
+    </PaginationNav>
   );
 };
 

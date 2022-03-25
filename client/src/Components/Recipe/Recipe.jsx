@@ -1,26 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import {
+  RecipeContainer,
+  ImageContainer,
+  Image,
+  TextContainer,
+  RecipeTitle,
+  DietsContainer,
+  Diet,
+} from './RecipeStyled';
 
 const Recipe = ({ image, title, diets, id }) => {
   let key = 0;
   return (
-    <div>
+    <RecipeContainer>
       <Link to={`/recipe/${id}`}>
-        <img src={image} alt="img" />
-        <p> {title} </p>
-        {diets.map((d) => {
-          const split = d.split(" ");
-
-          for (let i = 0; i < split.length; i++)
-            split[i] = split[i].charAt(0).toUpperCase() + split[i].slice(1);
-
-          const diet = split.join(" ");
-          key++;
-
-          return <p key={key}> {diet} </p>;
-        })}
+        <ImageContainer>
+          <Image src={image} alt='img' />
+        </ImageContainer>
       </Link>
-    </div>
+
+      <TextContainer>
+        <RecipeTitle> {title} </RecipeTitle>
+        <DietsContainer>
+          {diets.map((d) => {
+            const split = d.split(' ');
+
+            for (let i = 0; i < split.length; i++)
+              split[i] = split[i].charAt(0).toUpperCase() + split[i].slice(1);
+
+            const diet = split.join(' ');
+            key++;
+
+            return <Diet key={key}> {diet} </Diet>;
+          })}
+        </DietsContainer>
+      </TextContainer>
+    </RecipeContainer>
   );
 };
 

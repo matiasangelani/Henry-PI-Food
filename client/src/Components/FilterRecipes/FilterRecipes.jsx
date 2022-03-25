@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { filterByDiet } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
+import {
+  ConteinerFilters,
+  ContainerLabelInput,
+  LabelFilter,
+  InputFilter,
+  SliderFilter,
+} from './FilterStyled';
 
 const FilterRecipes = () => {
   const [diets, setDiets] = useState({
@@ -40,88 +47,119 @@ const FilterRecipes = () => {
       ketogenic */
 
   return (
-    <div>
-      <div>Filter</div>
-      <form>
-        <input
+    <ConteinerFilters>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
+          id='vegetarian'
           name='vegetarian'
           value='vegetarian'
           onChange={handleOnChange}
         />
-        <label htmlFor='vegetarian'>Vegetarian</label>
-        <input
+        <LabelFilter htmlFor='vegetarian' />
+        <SliderFilter>Vegetarian</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='vegan'
           value='vegan'
           onChange={handleOnChange}
         />
-        <label htmlFor='vegan'>Vegan</label>
-        <input
+        <LabelFilter htmlFor='vegan' />
+        <SliderFilter>Vegan</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='gluten free'
           value='gluten free'
           onChange={handleOnChange}
         />
-        <label htmlFor='gluten free'>Gluten Free</label>
-        <input
+        <LabelFilter htmlFor='gluten free' />
+        <SliderFilter>Gluten Free</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='dairy free'
           value='dairy free'
           onChange={handleOnChange}
         />
-        <label htmlFor='dairy free'>Dairy Free</label>
-        <input
+        <LabelFilter htmlFor='dairy free' />
+        <SliderFilter>Dairy Free</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='lacto ovo vegetarian'
           value='lacto ovo vegetarian'
           onChange={handleOnChange}
         />
-        <label htmlFor='lacto ovo vegetarian'>Lacto Ovo Vegetarian</label>
-        <input
+        <LabelFilter htmlFor='lacto ovo vegetarian' />
+        <SliderFilter>Lacto Ovo Vegetarian</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='pescatarian'
           value='pescatarian'
           onChange={handleOnChange}
         />
-        <label htmlFor='pescatarian'>Pescatarian</label>
-        <input
+        <LabelFilter htmlFor='pescatarian' />
+        <SliderFilter>Pescatarian</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='paleolithic'
           value='paleolithic'
           onChange={handleOnChange}
         />
-        <label htmlFor='paleolithic'>Paleolithic</label>
-        <input
+        <LabelFilter htmlFor='paleolithic' />
+        <SliderFilter>Paleolithic</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='fodmap friendly'
           value='fodmap friendly'
           onChange={handleOnChange}
         />
-        <label htmlFor='fodmap friendly'>Low FODMAP</label>
-        <input
+        <LabelFilter htmlFor='fodmap friendly' />
+        <SliderFilter>Low FODMAP</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='primal'
           value='primal'
           onChange={handleOnChange}
         />
-        <label htmlFor='primal'>Primal</label>
-        <input
+        <LabelFilter htmlFor='primal' />
+        <SliderFilter>Primal</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='whole 30'
           value='whole 30'
           onChange={handleOnChange}
         />
-        <label htmlFor='whole 30'>Whole 30</label>
-        <input
+        <LabelFilter htmlFor='whole 30' />
+        <SliderFilter>Whole 30</SliderFilter>
+      </ContainerLabelInput>
+      <ContainerLabelInput>
+        <InputFilter
           type='checkbox'
           name='ketogenic'
           value='ketogenic'
           onChange={handleOnChange}
         />
-        <label htmlFor='ketogenic'>Ketogenic</label>
-      </form>
-    </div>
+        <LabelFilter htmlFor='ketogenic' />
+        <SliderFilter>Ketogenic</SliderFilter>
+      </ContainerLabelInput>
+    </ConteinerFilters>
   );
 };
 

@@ -2,6 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getDiets, postRecipe } from '../../redux/actions';
+import {
+  ContainerForm,
+  Form,
+  Input,
+  InputDiet,
+  LabelDiet,
+  TextArea,
+  DietsContainer,
+  Submit,
+  DivDiet,
+} from './CreateRecipeStyled';
 
 const CreateRecipe = () => {
   const regexOnlyLetterAndSpace = /^[a-zA-Z\s]*$/;
@@ -111,65 +122,71 @@ const CreateRecipe = () => {
   console.log(error);
 
   return (
-    <form onSubmit={handleOnSubmit}>
-      <input
-        type='text'
-        name='name'
-        placeholder='Title'
-        value={input.name}
-        onChange={handleOnChange}
-      />
-      <textarea
-        name='dishSummary'
-        cols='30'
-        rows='10'
-        placeholder='Summary'
-        value={input.dishSummary}
-        onChange={handleOnChange}
-      ></textarea>
-      <input
-        type='number'
-        name='points'
-        placeholder='Points'
-        onChange={handleOnChange}
-      />
-      <input
-        type='number'
-        name='healthy'
-        placeholder='Healthy level'
-        onChange={handleOnChange}
-      />
+    <ContainerForm>
+      <Form onSubmit={handleOnSubmit} autocomplete='off'>
+        <Input
+          autocomplete='off'
+          type='text'
+          name='name'
+          placeholder='Title'
+          value={input.name}
+          onChange={handleOnChange}
+        />
+        <TextArea
+          name='dishSummary'
+          cols='30'
+          rows='10'
+          placeholder='Summary'
+          value={input.dishSummary}
+          onChange={handleOnChange}
+        ></TextArea>
+        <Input
+          type='number'
+          name='points'
+          placeholder='Points'
+          onChange={handleOnChange}
+        />
+        <Input
+          type='number'
+          name='healthy'
+          placeholder='Healthy level'
+          onChange={handleOnChange}
+        />
 
-      <textarea
-        name='instructions'
-        cols='30'
-        rows='10'
-        placeholder='Instructions'
-        value={input.instructions}
-        onChange={handleOnChange}
-      ></textarea>
+        <TextArea
+          name='instructions'
+          cols='30'
+          rows='10'
+          placeholder='Instructions'
+          value={input.instructions}
+          onChange={handleOnChange}
+        ></TextArea>
 
-      {typeDiets.map((d) => (
-        <div key={d.id}>
-          <input
-            type='checkbox'
-            name={d.name}
-            value={d.name}
-            onChange={handleOnChangeCheck}
-          />
-          {d.name}
-          <label htmlFor={d.name}></label>
-        </div>
-      ))}
+        <DietsContainer>
+          {typeDiets.map((d) => (
+            <DivDiet key={d.id}>
+              <InputDiet
+                type='checkbox'
+                id={d.name}
+                name={d.name}
+                value={d.name}
+                onChange={handleOnChangeCheck}
+              />
 
-      {error.errorTitle || error.errorPoints || error.errorHealthy ? (
-        <button type='submit' disabled>
-          Create
-        </button>
-      ) : (
-        <button type='submit'>Create</button>
-      )}
-    </form>
+              <LabelDiet htmlFor={d.name}>{d.name}</LabelDiet>
+            </DivDiet>
+          ))}
+        </DietsContainer>
+
+        {error.errorTitle || error.errorPoints || error.errorHealthy ? (
+          <Submit type='submit' disabled>
+            Create
+          </Submit>
+        ) : (
+          <Submit type='submit'>Create</Submit>
+        )}
+      </Form>
+    </ContainerForm>
   );
 };
 

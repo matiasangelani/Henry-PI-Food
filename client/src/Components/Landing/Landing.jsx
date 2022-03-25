@@ -1,11 +1,24 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import {
+  IconContainer,
+  ContentContainer,
+  TitleContainer,
+  ButtonContainer,
+  ChefSVG,
+} from './LandingStyled';
 
 const Landing = () => {
   return (
     <>
-      <h1>Henry Food</h1>
-      <Link to="/recipes">Acceder</Link>
+      <IconContainer />
+      {/* <ChefSVG /> */}
+      <ContentContainer>
+        <TitleContainer>Henry Food</TitleContainer>
+        <Link to='/recipes'>
+          <ButtonContainer>Acceder</ButtonContainer>
+        </Link>
+      </ContentContainer>
     </>
   );
 };

@@ -1,10 +1,11 @@
-import { React, useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { getSearchRecipes } from "../../redux/actions";
+import { React, useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { getSearchRecipes } from '../../redux/actions';
+import { InputSearch } from './SearchStyled';
 
 const Search = () => {
   const [input, setInput] = useState({
-    search: "",
+    search: '',
   });
   const dispatch = useDispatch();
   const didMountRef = useRef(false);
@@ -22,9 +23,10 @@ const Search = () => {
   // }, [dispatch, input]);
 
   return (
-    <input
-      type="text"
-      placeholder="Search..."
+    <InputSearch
+      size='30'
+      type='text'
+      placeholder='   Search...'
       value={input.search}
       onChange={handleOnChange}
     />
