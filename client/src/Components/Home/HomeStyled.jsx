@@ -1,4 +1,28 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const move = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+export const LoadingContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  /* top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0; */
+  //color: #ffffff;
+`;
 
 export const HomeContainer = styled.main`
   /* display: grid;
@@ -50,6 +74,43 @@ export const Section = styled.section`
   //grid-auto-flow: row;
   align-items: center;
   justify-items: center;
+  /* div {
+    color: red;
+    display: flex;
+  } */
+
+  ${LoadingContainer} {
+    position: absolute;
+    /* width: 100%;
+    height: 100%; */
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+
+    /* padding: 0;
+    margin: 0; */
+    /* padding-top: 0px;
+    top: 0px;
+    margin-left: 0px; */
+    /* top: 50vh; */
+    /* left: 50vw; */
+    /* width: 80px;
+    height: 80px; */
+    &:after {
+      content: ' ';
+      display: block;
+      width: 64px;
+      height: 64px;
+      margin: 8px;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      border-color: #fff transparent #fff transparent;
+      animation: ${move} 1.2s linear infinite;
+    }
+  }
 `;
 
 export const PaginationContainer = styled.footer`

@@ -5,6 +5,8 @@ export const InputSearch = styled.input`
   height: 45px;
   border-radius: 20px 40px;
   border: none;
+  padding-left: 15px;
+  font-size: 15px;
   &:focus {
     outline: none;
   }

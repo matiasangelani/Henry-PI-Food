@@ -18,6 +18,7 @@ import {
   Footer,
   PaginationContainer,
   ButtonCreate,
+  LoadingContainer,
 } from './HomeStyled';
 
 const Home = () => {
@@ -54,14 +55,16 @@ const Home = () => {
       </Aside>
       <Section>
         {!getRecipes.length ? (
-          <Loading />
+          <LoadingContainer />
         ) : (
+          // <Loading />
           <Recipes currentRecipes={currentRecipes} />
         )}
         <PaginationContainer>
           <Pagination
             recipesPerPage={recipesPerPage}
             totalRecipes={recipes.length}
+            //totalRecipes={100}
             paginate={paginate}
           />
         </PaginationContainer>

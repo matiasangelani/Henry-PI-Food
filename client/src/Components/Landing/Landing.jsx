@@ -6,20 +6,32 @@ import {
   TitleContainer,
   ButtonContainer,
   ChefSVG,
+  LandingContainer,
+  ContentConteiner,
+  MainTitle,
+  AccessButton,
 } from './LandingStyled';
 
 const Landing = () => {
   return (
-    <>
-      <IconContainer />
-      {/* <ChefSVG /> */}
-      <ContentContainer>
-        <TitleContainer>Henry Food</TitleContainer>
+    // <>
+    //   <IconContainer />
+    //   <ChefSVG />
+    //   <ContentContainer>
+    //     <TitleContainer>Henry Food</TitleContainer>
+    //     <Link to='/recipes'>
+    //       <ButtonContainer>Acceder</ButtonContainer>
+    //     </Link>
+    //   </ContentContainer>
+    // </>
+    <LandingContainer>
+      <ContentConteiner>
+        <MainTitle>Henry Food</MainTitle>
         <Link to='/recipes'>
-          <ButtonContainer>Acceder</ButtonContainer>
+          <AccessButton>Acceder</AccessButton>
         </Link>
-      </ContentContainer>
-    </>
+      </ContentConteiner>
+    </LandingContainer>
   );
 };
 

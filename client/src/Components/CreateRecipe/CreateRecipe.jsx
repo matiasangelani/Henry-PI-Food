@@ -12,6 +12,8 @@ import {
   DietsContainer,
   Submit,
   DivDiet,
+  InputError,
+  ErrorContainer,
 } from './CreateRecipeStyled';
 
 const CreateRecipe = () => {
@@ -32,6 +34,9 @@ const CreateRecipe = () => {
     errorPoints: '',
     errorHealthy: '',
   });
+  const errorStyle = {
+    border: '2px solid #8f0000',
+  };
 
   useEffect(() => {
     dispatch(getDiets());
@@ -124,14 +129,31 @@ const CreateRecipe = () => {
   return (
     <ContainerForm>
       <Form onSubmit={handleOnSubmit} autocomplete='off'>
-        <Input
-          autocomplete='off'
-          type='text'
-          name='name'
-          placeholder='Title'
-          value={input.name}
-          onChange={handleOnChange}
-        />
+        {error.errorTitle ? (
+          <ErrorContainer>
+            <Input
+              style={errorStyle}
+              autocomplete='off'
+              type='text'
+              name='name'
+              placeholder='Title'
+              value={input.name}
+              onChange={handleOnChange}
+            />
+            <InputError>Only letters and spaces</InputError>
+          </ErrorContainer>
+        ) : (
+          <ErrorContainer>
+            <Input
+              autocomplete='off'
+              type='text'
+              name='name'
+              placeholder='Title'
+              value={input.name}
+              onChange={handleOnChange}
+            />
+          </ErrorContainer>
+        )}
         <TextArea
           name='dishSummary'
           cols='30'
@@ -140,18 +162,49 @@ const CreateRecipe = () => {
           value={input.dishSummary}
           onChange={handleOnChange}
         ></TextArea>
-        <Input
-          type='number'
-          name='points'
-          placeholder='Points'
-          onChange={handleOnChange}
-        />
-        <Input
-          type='number'
-          name='healthy'
-          placeholder='Healthy level'
-          onChange={handleOnChange}
-        />
+
+        {error.errorPoints ? (
+          <ErrorContainer>
+            <Input
+              style={errorStyle}
+              type='number'
+              name='points'
+              placeholder='Points'
+              onChange={handleOnChange}
+            />
+            <InputError>Only greater than 0 and smaller than 100</InputError>
+          </ErrorContainer>
+        ) : (
+          <ErrorContainer>
+            <Input
+              type='number'
+              name='points'
+              placeholder='Points'
+              onChange={handleOnChange}
+            />
+          </ErrorContainer>
+        )}
+        {error.errorHealthy ? (
+          <ErrorContainer>
+            <Input
+              style={errorStyle}
+              type='number'
+              name='healthy'
+              placeholder='Healthy level'
+              onChange={handleOnChange}
+            />
+            <InputError>Only greater than 0 and smaller than 100</InputError>
+          </ErrorContainer>
+        ) : (
+          <ErrorContainer>
+            <Input
+              type='number'
+              name='healthy'
+              placeholder='Healthy level'
+              onChange={handleOnChange}
+            />
+          </ErrorContainer>
+        )}
 
         <TextArea
           name='instructions'
@@ -178,7 +231,11 @@ const CreateRecipe = () => {
           ))}
         </DietsContainer>
 
-        {error.errorTitle || error.errorPoints || error.errorHealthy ? (
+        {!input.name ||
+        !input.dishSummary ||
+        error.errorTitle ||
+        error.errorPoints ||
+        error.errorHealthy ? (
           <Submit type='submit' disabled>
             Create
           </Submit>

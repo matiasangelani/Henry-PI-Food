@@ -26,7 +26,7 @@ const Search = () => {
     <InputSearch
       size='30'
       type='text'
-      placeholder='   Search...'
+      placeholder='Search...'
       value={input.search}
       onChange={handleOnChange}
     />

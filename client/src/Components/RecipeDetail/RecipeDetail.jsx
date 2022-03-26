@@ -2,6 +2,18 @@ import { React, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getRecipeDetails } from '../../redux/actions';
+import {
+  GeneralContainer,
+  RecipeDetailContainer,
+  ImageDetail,
+  TitleDitail,
+  DietsDitail,
+  SummaryDetail,
+  Diets,
+  Points,
+  StepsContainer,
+  LoadingDetail,
+} from './RecipeDetailStyled';
 
 const RecipeDetail = () => {
   const recipeDetail = useSelector((state) => state.recipeDetail);
@@ -26,49 +38,55 @@ const RecipeDetail = () => {
     });
 
     let created;
-    if (findCreatedInDb) created = findCreatedInDb.created;
+    findCreatedInDb ? (created = true) : (created = '');
 
     dispatch(getRecipeDetails(parseInt(params.id), created));
   }, [dispatch]);
 
   return (
-    <div>
-      <img src={image} alt='img' />
-      <p> {title} </p>
-      {diets?.map((d) => {
-        const split = d.split(' ');
+    <GeneralContainer>
+      {Object.keys(recipeDetail).includes('image') ? (
+        <RecipeDetailContainer>
+          <ImageDetail src={image} alt='img' />
+          <TitleDitail> {title} </TitleDitail>
+          <DietsDitail>
+            {diets?.map((d) => {
+              const split = d.split(' ');
 
-        for (let i = 0; i < split.length; i++)
-          split[i] = split[i].charAt(0).toUpperCase() + split[i].slice(1);
+              for (let i = 0; i < split.length; i++)
+                split[i] = split[i].charAt(0).toUpperCase() + split[i].slice(1);
 
-        const diet = split.join(' ');
-        key++;
+              const diet = split.join(' ');
+              key++;
 
-        return <p key={key}> {diet} </p>;
-      })}
+              return <Diets key={key}> {diet} </Diets>;
+            })}
+          </DietsDitail>
 
-      {/* <p> {summary?.replace(/<[^>]*>/g, '')} </p> */}
+          {/* <p> {summary?.replace(/<[^>]*>/g, '')} </p> */}
 
-      <p dangerouslySetInnerHTML={{ __html: summary }} />
+          <SummaryDetail dangerouslySetInnerHTML={{ __html: summary }} />
 
-      <p> {weightWatcherSmartPoints} </p>
-      <p> {healthScore} </p>
-      {recipeDetail.hasOwnProperty('analyzedInstructions') &&
-        analyzedInstructions[0].steps.map((s) => {
-          const { number, step, ingredients } = s;
+          <div>
+            <Points>Points: {weightWatcherSmartPoints}</Points>
+            <Points>Healthy Level: {healthScore}</Points>
+          </div>
+          {recipeDetail.hasOwnProperty('analyzedInstructions') &&
+            analyzedInstructions[0].steps.map((s) => {
+              const { number, step, ingredients } = s;
 
-          return (
-            <div key={number}>
-              <p> {number} </p>
-              <p> {step} </p>
-              {/* <p> {ingredients} </p> */}
-            </div>
-          );
-        })}
-      {/* {recipeDetail.hasOwnProperty('instructions') &&
+              return (
+                <StepsContainer key={number}>
+                  <p> Step {number} </p>
+                  <p> {step} </p>
+                  {/* <p> {ingredients} </p> */}
+                </StepsContainer>
+              );
+            })}
+          {/* {recipeDetail.hasOwnProperty('instructions') &&
         recipeDetail.instructions?.map((s) => {
           const { number, step, ingredients } = s;
-
+          
           return (
             <div key={number}>
               <p> {number} </p>
@@ -77,10 +95,14 @@ const RecipeDetail = () => {
             </div>
           );
         }) */}
-      {recipeDetail.hasOwnProperty('instructions') && (
-        <p> {recipeDetail.instructions} </p>
+          {recipeDetail.hasOwnProperty('instructions') && (
+            <p> {recipeDetail.instructions} </p>
+          )}
+        </RecipeDetailContainer>
+      ) : (
+        <LoadingDetail />
       )}
-    </div>
+    </GeneralContainer>
   );
 };
 

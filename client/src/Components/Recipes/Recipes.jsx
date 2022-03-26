@@ -7,7 +7,7 @@ import Recipe from '../Recipe/Recipe';
 // import OrderRecipes from "../OrderRecipes/OrderRecipes";
 // import FilterRecipes from "../FilterRecipes/FilterRecipes";
 // import Pagination from "../Pagination/Pagination";
-import { TitleRecipes } from './RecipeStyled';
+import { TitleRecipes } from './RecipesStyled';
 
 const Recipes = ({ currentRecipes }) => {
   const getRecipes = useSelector((state) => state.getRecipes);
