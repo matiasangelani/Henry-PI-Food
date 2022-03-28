@@ -93,3 +93,30 @@ export const ButtonCreate = styled.button`
     cursor: pointer;
   }
 `;
+
+// export const ButtonHomeContainer = styled.div`
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100px;
+//   height: 50px;
+// `;
+
+export const ButtonHome = styled.button`
+  position: absolute;
+  font-family: monospace;
+  color: #ffffff;
+  background-color: #103141;
+  border: none;
+  width: 100px;
+  padding: 1rem;
+  z-index: 1;
+  text-align: center;
+  transition-duration: 0.5s;
+  margin-top: 50px;
+  left: 5%;
+  &:hover {
+    background-color: #315162;
+    cursor: pointer;
+  }
+`;

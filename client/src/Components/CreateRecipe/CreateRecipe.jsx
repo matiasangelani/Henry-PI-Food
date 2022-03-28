@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getDiets, postRecipe } from '../../redux/actions';
+import { ButtonHomeContainer, ButtonHome } from '../Home/HomeStyled';
 import {
   ContainerForm,
   Form,
@@ -115,123 +117,131 @@ const CreateRecipe = () => {
   };
 
   return (
-    <ContainerForm>
-      <Form onSubmit={handleOnSubmit} autocomplete='off'>
-        {error.errorTitle ? (
-          <ErrorContainer>
-            <Input
-              style={errorStyle}
-              autocomplete='off'
-              type='text'
-              name='name'
-              placeholder='Title'
-              value={input.name}
-              onChange={handleOnChange}
-            />
-            <InputError>Only letters and spaces</InputError>
-          </ErrorContainer>
-        ) : (
-          <ErrorContainer>
-            <Input
-              autocomplete='off'
-              type='text'
-              name='name'
-              placeholder='Title'
-              value={input.name}
-              onChange={handleOnChange}
-            />
-          </ErrorContainer>
-        )}
-        <TextArea
-          name='dishSummary'
-          cols='30'
-          rows='10'
-          placeholder='Summary'
-          value={input.dishSummary}
-          onChange={handleOnChange}
-        ></TextArea>
+    <>
+      <Link to='/recipes'>
+        <ButtonHome>Home</ButtonHome>
+      </Link>
+      {/* <ButtonHomeContainer>
+      </ButtonHomeContainer> */}
 
-        {error.errorPoints ? (
-          <ErrorContainer>
-            <Input
-              style={errorStyle}
-              type='number'
-              name='points'
-              placeholder='Points'
-              onChange={handleOnChange}
-            />
-            <InputError>Only greater than 0 and smaller than 100</InputError>
-          </ErrorContainer>
-        ) : (
-          <ErrorContainer>
-            <Input
-              type='number'
-              name='points'
-              placeholder='Points'
-              onChange={handleOnChange}
-            />
-          </ErrorContainer>
-        )}
-        {error.errorHealthy ? (
-          <ErrorContainer>
-            <Input
-              style={errorStyle}
-              type='number'
-              name='healthy'
-              placeholder='Healthy level'
-              onChange={handleOnChange}
-            />
-            <InputError>Only greater than 0 and smaller than 100</InputError>
-          </ErrorContainer>
-        ) : (
-          <ErrorContainer>
-            <Input
-              type='number'
-              name='healthy'
-              placeholder='Healthy level'
-              onChange={handleOnChange}
-            />
-          </ErrorContainer>
-        )}
-
-        <TextArea
-          name='instructions'
-          cols='30'
-          rows='10'
-          placeholder='Instructions'
-          value={input.instructions}
-          onChange={handleOnChange}
-        ></TextArea>
-
-        <DietsContainer>
-          {typeDiets.map((d) => (
-            <DivDiet key={d.id}>
-              <InputDiet
-                type='checkbox'
-                id={d.name}
-                name={d.name}
-                value={d.name}
-                onChange={handleOnChangeCheck}
+      <ContainerForm>
+        <Form onSubmit={handleOnSubmit} autocomplete='off'>
+          {error.errorTitle ? (
+            <ErrorContainer>
+              <Input
+                style={errorStyle}
+                autocomplete='off'
+                type='text'
+                name='name'
+                placeholder='Title'
+                value={input.name}
+                onChange={handleOnChange}
               />
+              <InputError>Only letters and spaces</InputError>
+            </ErrorContainer>
+          ) : (
+            <ErrorContainer>
+              <Input
+                autocomplete='off'
+                type='text'
+                name='name'
+                placeholder='Title'
+                value={input.name}
+                onChange={handleOnChange}
+              />
+            </ErrorContainer>
+          )}
+          <TextArea
+            name='dishSummary'
+            cols='30'
+            rows='10'
+            placeholder='Summary'
+            value={input.dishSummary}
+            onChange={handleOnChange}
+          ></TextArea>
 
-              <LabelDiet htmlFor={d.name}>{d.name}</LabelDiet>
-            </DivDiet>
-          ))}
-        </DietsContainer>
+          {error.errorPoints ? (
+            <ErrorContainer>
+              <Input
+                style={errorStyle}
+                type='number'
+                name='points'
+                placeholder='Points'
+                onChange={handleOnChange}
+              />
+              <InputError>Only greater than 0 and smaller than 100</InputError>
+            </ErrorContainer>
+          ) : (
+            <ErrorContainer>
+              <Input
+                type='number'
+                name='points'
+                placeholder='Points'
+                onChange={handleOnChange}
+              />
+            </ErrorContainer>
+          )}
+          {error.errorHealthy ? (
+            <ErrorContainer>
+              <Input
+                style={errorStyle}
+                type='number'
+                name='healthy'
+                placeholder='Healthy level'
+                onChange={handleOnChange}
+              />
+              <InputError>Only greater than 0 and smaller than 100</InputError>
+            </ErrorContainer>
+          ) : (
+            <ErrorContainer>
+              <Input
+                type='number'
+                name='healthy'
+                placeholder='Healthy level'
+                onChange={handleOnChange}
+              />
+            </ErrorContainer>
+          )}
 
-        {!input.name ||
-        !input.dishSummary ||
-        error.errorTitle ||
-        error.errorPoints ||
-        error.errorHealthy ? (
-          <Submit type='submit' disabled>
-            Create
-          </Submit>
-        ) : (
-          <Submit type='submit'>Create</Submit>
-        )}
-      </Form>
-    </ContainerForm>
+          <TextArea
+            name='instructions'
+            cols='30'
+            rows='10'
+            placeholder='Instructions'
+            value={input.instructions}
+            onChange={handleOnChange}
+          ></TextArea>
+
+          <DietsContainer>
+            {typeDiets.map((d) => (
+              <DivDiet key={d.id}>
+                <InputDiet
+                  type='checkbox'
+                  id={d.name}
+                  name={d.name}
+                  value={d.name}
+                  onChange={handleOnChangeCheck}
+                />
+
+                <LabelDiet htmlFor={d.name}>{d.name}</LabelDiet>
+              </DivDiet>
+            ))}
+          </DietsContainer>
+
+          {!input.name ||
+          !input.dishSummary ||
+          error.errorTitle ||
+          error.errorPoints ||
+          error.errorHealthy ? (
+            <Submit type='submit' disabled>
+              Create
+            </Submit>
+          ) : (
+            <Submit type='submit'>Create</Submit>
+          )}
+        </Form>
+      </ContainerForm>
+    </>
   );
 };
 

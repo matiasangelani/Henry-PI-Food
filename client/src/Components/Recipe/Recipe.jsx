@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import imgNotFound from '../../utils/img/FoodNotFound.png';
 import {
   RecipeContainer,
@@ -13,7 +12,6 @@ import {
 } from './RecipeStyled';
 
 const Recipe = ({ image, title, diets, id }) => {
-  const recipes = useSelector((state) => state.recipes);
   let key = 0;
   return (
     <RecipeContainer>

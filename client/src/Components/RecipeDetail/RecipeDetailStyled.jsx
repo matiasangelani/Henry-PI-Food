@@ -65,12 +65,17 @@ export const SummaryDetail = styled.p`
   }
 `;
 
+export const PointsContainer = styled.div`
+  display: flex;
+`;
+
 export const Points = styled.span`
-  padding: 0 100px 0 100px;
+  padding: 50px 100px 0 100px;
+  //margin-top: 100px;
 `;
 
 export const StepsContainer = styled.div`
-  margin-top: 40px;
+  margin-top: 80px;
   text-align: center;
 `;
 

@@ -1,11 +1,8 @@
 import React from 'react';
 import Recipe from '../Recipe/Recipe';
 import { TitleRecipes } from './RecipesStyled';
-import { useSelector } from 'react-redux';
 
 const Recipes = ({ currentRecipes }) => {
-  const recipes = useSelector((state) => state.recipes);
-
   return (
     <>
       <TitleRecipes>Recipes</TitleRecipes>

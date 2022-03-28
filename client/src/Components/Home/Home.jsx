@@ -26,12 +26,7 @@ const Home = () => {
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  let currentRecipes;
-  if (typeof recipes !== 'object') {
-    currentRecipes = recipes?.slice(indexOfFirstRecipe, indexOfLastRecipe);
-  }
-
-  //const currentRecipes = recipes?.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  const currentRecipes = recipes?.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   const paginate = (pageNumber, e) => {
     e.preventDefault();
