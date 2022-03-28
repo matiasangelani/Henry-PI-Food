@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import img from './utils/img/background.jpg';
-//import img2 from './utils/img/footer.png';
 
 const GlobalStyled = createGlobalStyle`
 body {
@@ -15,8 +14,6 @@ body {
   min-height: 100vh;
   top: 0;
   left: 0;
-  /* width: 100vh; */
-  //background-image :linear-gradient(to right, #54586896, #4f3d5070), url(${img}); 
   }
 `;
 

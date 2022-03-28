@@ -10,13 +10,9 @@ export const ContainerLabelInput = styled.div`
   position: relative;
   margin-top: 10px;
   margin-bottom: 10px;
-  /* width: 50px;
-  height: 25px; */
 `;
 
 export const LabelFilter = styled.label`
-  //class=switch
-  //color: #fff;
   position: absolute;
   top: 0;
   left: 0;
@@ -46,9 +42,7 @@ export const InputFilter = styled.input`
   height: 25px;
   cursor: pointer;
   &:checked + ${LabelFilter} {
-    //background-color: #2c5282;
-    //background-color: #28381c;
-    background-color: #1c2e38;
+    background-color: #103141;
     &::after {
       content: '';
       display: block;
@@ -68,5 +62,4 @@ export const SliderFilter = styled.span`
   margin-left: 20px;
   font-family: monospace;
   font-size: 20px;
-  //display: inline;
 `;

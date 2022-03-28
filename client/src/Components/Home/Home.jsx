@@ -2,20 +2,16 @@ import { React, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllRecipes } from '../../redux/actions';
 import { Link } from 'react-router-dom';
-import Loading from '../Loading/Loading';
 import Search from '../Search/Search';
 import FilterRecipes from '../FilterRecipes/FilterRecipes';
 import OrderRecipes from '../OrderRecipes/OrderRecipes';
 import Recipes from '../Recipes/Recipes';
 import Pagination from '../Pagination/Pagination';
-import CreateRecipe from '../CreateRecipe/CreateRecipe';
 import {
   HomeContainer,
   Header,
-  AsideSectionContainer,
   Aside,
   Section,
-  Footer,
   PaginationContainer,
   ButtonCreate,
   LoadingContainer,
@@ -30,7 +26,12 @@ const Home = () => {
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  let currentRecipes;
+  if (typeof recipes !== 'object') {
+    currentRecipes = recipes?.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  }
+
+  //const currentRecipes = recipes?.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   const paginate = (pageNumber, e) => {
     e.preventDefault();
@@ -57,14 +58,15 @@ const Home = () => {
         {!getRecipes.length ? (
           <LoadingContainer />
         ) : (
-          // <Loading />
+          // : !getRecipes.length ? (<LoadingContainer />)
           <Recipes currentRecipes={currentRecipes} />
         )}
+
         <PaginationContainer>
           <Pagination
             recipesPerPage={recipesPerPage}
+            currentPage={currentPage}
             totalRecipes={recipes.length}
-            //totalRecipes={100}
             paginate={paginate}
           />
         </PaginationContainer>

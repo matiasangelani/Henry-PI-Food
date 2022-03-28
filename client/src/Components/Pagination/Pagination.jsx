@@ -9,8 +9,9 @@ import {
 const Pagination = ({ recipesPerPage, totalRecipes, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalRecipes / recipesPerPage); i++)
-    pageNumbers.push(i);
+  const totalPages = Math.ceil(totalRecipes / recipesPerPage);
+
+  for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
 
   return (
     <PaginationNav>

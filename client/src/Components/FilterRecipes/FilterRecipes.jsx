@@ -10,10 +10,7 @@ import {
 } from './FilterStyled';
 
 const FilterRecipes = () => {
-  const [diets, setDiets] = useState({
-    // vegetarian: true,
-    // glutenFree: true,
-  });
+  const [diets, setDiets] = useState({});
   const dispatch = useDispatch();
   const didMountRef = useRef(false);
 
@@ -25,26 +22,10 @@ const FilterRecipes = () => {
   };
 
   useEffect(() => {
-    //console.log(diets);
     didMountRef.current
       ? dispatch(filterByDiet(diets))
       : (didMountRef.current = true);
   }, [dispatch, diets]);
-
-  /*BOOLEANAS
-      vegetarian,
-      vegan,
-      glutenFree,
-      dairyFree */
-  /******************************************** */
-  /*ARRAY
-      lacto ovo vegetarian,
-      pescatarian,
-      paleolithic,
-      fodmap friendly,
-      primal,
-      whole 30,
-      ketogenic */
 
   return (
     <ConteinerFilters>

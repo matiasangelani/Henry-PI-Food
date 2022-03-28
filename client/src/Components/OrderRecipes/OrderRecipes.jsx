@@ -1,28 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  //orderRecipesDefault,
   orderRecipesAscending,
   orderRecipesDescending,
   orderRecipesByHighScore,
   orderRecipesByLowScore,
 } from '../../redux/actions';
-import {
-  ButtonOrder,
-  MenuOrder,
-  ListOrder,
-  ItemOrder,
-} from './OrderRecipesStyled';
+import { MenuOrder, ListOrder, ItemOrder } from './OrderRecipesStyled';
 
 const OrderRecipes = () => {
   const dispatch = useDispatch();
 
   const handleOnClick = (e) => {
     const value = e.target.innerText;
-
-    // console.log(e);
-    // console.log(e.target.innerText);
-    // console.log(value);
 
     value === 'Ascending'
       ? dispatch(orderRecipesAscending())
@@ -32,13 +22,8 @@ const OrderRecipes = () => {
       ? dispatch(orderRecipesByHighScore())
       : value === 'Low Score'
       ? dispatch(orderRecipesByLowScore())
-      : // : value === "Default"
-        // ? dispatch(orderRecipesDefault())
-        console.log('error');
+      : console.log('error');
   };
-
-  //console.log(order);
-  //console.log(orderRecipes);
 
   return (
     <MenuOrder>

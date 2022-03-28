@@ -20,7 +20,7 @@ export const getAllRecipes = () => async (dispatch) => {
       payload: payload.data,
     });
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 };
 
@@ -30,21 +30,14 @@ export const getSearchRecipes = (input) => async (dispatch) => {
       `http://localhost:3001/recipes?name=${input}`
     );
 
-    console.log(payload.data);
     dispatch({
       type: GET_SEARCH_RECIPES,
       payload: payload.data,
     });
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 };
-
-// export const orderRecipesDefault = () => {
-//   return {
-//     type: ORDER_RECIPES_DEFAULT,
-//   };
-// };
 
 export const orderRecipesAscending = () => {
   return {
@@ -83,7 +76,6 @@ export const getRecipeDetails = (id, boolean) => async (dispatch) => {
       `http://localhost:3001/recipes/${id}?created=${boolean}`
     );
 
-    //console.log(payload.data);
     dispatch({
       type: GET_RECIPE_DETAILS,
       payload: payload.data,
@@ -91,14 +83,9 @@ export const getRecipeDetails = (id, boolean) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
-  // return {
-  //   type: GET_RECIPE_DETAILS,
-  //   payload: id,
-  // };
 };
 
 export const postRecipe = (recipe) => async (dispatch) => {
-  console.log('postRecipe', recipe);
   const { name, dishSummary, points, healthy, instructions, diets } = recipe;
   try {
     const response = await axios.post('http://localhost:3001/recipe', {

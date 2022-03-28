@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getDiets, postRecipe } from '../../redux/actions';
 import {
   ContainerForm,
@@ -18,7 +17,6 @@ import {
 
 const CreateRecipe = () => {
   const regexOnlyLetterAndSpace = /^[a-zA-Z\s]*$/;
-  const newRecipe = useSelector((state) => state.newRecipe);
   const typeDiets = useSelector((state) => state.typeDiets);
   const dispatch = useDispatch();
   const [input, setInput] = useState({
@@ -41,12 +39,6 @@ const CreateRecipe = () => {
   useEffect(() => {
     dispatch(getDiets());
   }, [dispatch]);
-
-  // const validateInput = (e) => {
-  //   const successRegex = regexOnlyLetter.test(input.title);
-
-  //   successRegex ? handleOnChange(e) : setError('Invalid characters');
-  // };
 
   const handleOnChangeCheck = (e) => {
     if (e.target.checked) {
@@ -119,12 +111,8 @@ const CreateRecipe = () => {
   };
 
   const handleOnSubmit = (e) => {
-    //e.preventDefault();
     dispatch(postRecipe(input));
   };
-
-  console.log(input);
-  console.log(error);
 
   return (
     <ContainerForm>

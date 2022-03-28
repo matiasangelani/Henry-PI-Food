@@ -4,7 +4,6 @@ const initialState = {
   getRecipes: [],
   recipes: [],
   recipeDetail: {},
-  //orderDefaultRecipes: [],
   newRecipe: {},
   typeDiets: [],
 };
@@ -24,12 +23,6 @@ const rootReducer = (state = initialState, action) => {
         recipes: action.payload,
       };
 
-    // case actions.ORDER_RECIPES_DEFAULT:
-    //   return {
-    //     ...state,
-    //     recipes: state.orderDefaultRecipes,
-    //   };
-
     case actions.ORDER_RECIPES_ASCENDING:
       let ascendingRecipes = state.recipes.slice().sort((r1, r2) => {
         const title1 = r1.title.toLowerCase();
@@ -45,7 +38,6 @@ const rootReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        //orderDefaultRecipes: state.recipes,
         recipes: ascendingRecipes,
       };
 
@@ -67,7 +59,6 @@ const rootReducer = (state = initialState, action) => {
         .reverse();
       return {
         ...state,
-        //orderDefaultRecipes: state.recipes,
         recipes: descendingRecipes,
       };
 
@@ -86,7 +77,6 @@ const rootReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        //orderDefaultRecipes: state.recipes,
         recipes: highScoreRecipe,
       };
 
@@ -105,7 +95,6 @@ const rootReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        //orderDefaultRecipes: state.recipes,
         recipes: lowScoreRecipe,
       };
 
@@ -125,30 +114,19 @@ const rootReducer = (state = initialState, action) => {
 
       Object.values(action.payload).includes(true)
         ? (filterRecipes = recipesMod.filter((r) => {
-            //console.log(r);
             let count = 0;
             const find = r.diets.some((d) => {
               let countTrueProperties = 0;
-              //console.log(d);
-              //console.log(action.payload);
-
               for (let property in action.payload) {
                 if (action.payload[property]) countTrueProperties++;
                 if (d === property && action.payload[property]) count++;
               }
-
-              //console.log(countTrueProperties, count);
 
               if (countTrueProperties === count) {
                 //console.log("OK");
                 return true;
               }
               return false;
-
-              // if (action.payload[d] === true) {
-              //   console.log("OK", action.payload[d]);
-              //   return true;
-              // }
             });
             if (find) return r;
             return false;
@@ -157,20 +135,9 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         recipes: filterRecipes,
-        //orderDefaultRecipes: filterRecipes,
       };
 
     case actions.GET_RECIPE_DETAILS:
-      // let recipeDetailFilter = state.getRecipes.reduce((prevRec, currRec) => {
-      //   if (currRec.id === action.payload) {
-      //     prevRec = currRec;
-      //   }
-      //   return prevRec;
-      // }, {});
-      // return {
-      //   ...state,
-      //   recipeDetail: recipeDetailFilter,
-      // };
       return {
         ...state,
         recipeDetail: action.payload,

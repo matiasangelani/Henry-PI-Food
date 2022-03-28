@@ -1,7 +1,8 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getRecipeDetails } from '../../redux/actions';
+import imgNotFound from '../../utils/img/FoodNotFound.png';
 import {
   GeneralContainer,
   RecipeDetailContainer,
@@ -35,19 +36,25 @@ const RecipeDetail = () => {
     const findCreatedInDb = recipes.find((r) => {
       if (r.id === parseInt(params.id))
         return Object.keys(r).includes('created');
+      return false;
     });
 
     let created;
     findCreatedInDb ? (created = true) : (created = '');
 
     dispatch(getRecipeDetails(parseInt(params.id), created));
-  }, [dispatch]);
+  }, [dispatch, params.id, recipes]);
 
   return (
     <GeneralContainer>
-      {Object.keys(recipeDetail).includes('image') ? (
+      {Object.keys(recipeDetail).includes('title') ? (
         <RecipeDetailContainer>
-          <ImageDetail src={image} alt='img' />
+          {/* <ImageDetail src={image} alt='img' /> */}
+          {image ? (
+            <ImageDetail src={image} alt='img' />
+          ) : (
+            <ImageDetail src={imgNotFound} alt='img' />
+          )}
           <TitleDitail> {title} </TitleDitail>
           <DietsDitail>
             {diets?.map((d) => {
@@ -63,8 +70,6 @@ const RecipeDetail = () => {
             })}
           </DietsDitail>
 
-          {/* <p> {summary?.replace(/<[^>]*>/g, '')} </p> */}
-
           <SummaryDetail dangerouslySetInnerHTML={{ __html: summary }} />
 
           <div>
@@ -73,28 +78,15 @@ const RecipeDetail = () => {
           </div>
           {recipeDetail.hasOwnProperty('analyzedInstructions') &&
             analyzedInstructions[0].steps.map((s) => {
-              const { number, step, ingredients } = s;
+              const { number, step } = s;
 
               return (
                 <StepsContainer key={number}>
                   <p> Step {number} </p>
                   <p> {step} </p>
-                  {/* <p> {ingredients} </p> */}
                 </StepsContainer>
               );
             })}
-          {/* {recipeDetail.hasOwnProperty('instructions') &&
-        recipeDetail.instructions?.map((s) => {
-          const { number, step, ingredients } = s;
-          
-          return (
-            <div key={number}>
-              <p> {number} </p>
-              <p> {step} </p>
-              <p> {ingredients} </p>
-            </div>
-          );
-        }) */}
           {recipeDetail.hasOwnProperty('instructions') && (
             <p> {recipeDetail.instructions} </p>
           )}

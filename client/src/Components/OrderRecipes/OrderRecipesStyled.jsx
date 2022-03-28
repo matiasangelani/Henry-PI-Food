@@ -6,9 +6,7 @@ export const MenuOrder = styled.div`
 `;
 
 export const ListOrder = styled.ul`
-  //background-color: #2c5282;
-  //background-color: #28381c;
-  background-color: #1c2e38;
+  background-color: #103141;
   list-style: none;
   margin: 0;
   padding-left: 0;
@@ -39,9 +37,7 @@ export const ListOrder = styled.ul`
 
 export const ItemOrder = styled.li`
   color: #fff;
-  //background-color: #2c5282;
-  //background-color: #28381c;
-  background-color: #1c2e38;
+  background-color: #103141;
   display: block;
   width: 200px;
   text-align: center;
@@ -51,8 +47,6 @@ export const ItemOrder = styled.li`
   text-decoration: none;
   transition-duration: 0.5s;
   &:hover {
-    //background-color: #2a4365;
-    //background-color: #26291c;
     background-color: #315162;
     cursor: pointer;
   }

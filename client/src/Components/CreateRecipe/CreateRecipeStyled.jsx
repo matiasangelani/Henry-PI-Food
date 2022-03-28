@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { ButtonCreate } from '../Home/HomeStyled';
 
 export const ContainerForm = styled.div`
   display: flex;
@@ -26,7 +25,7 @@ export const Form = styled.form`
 
 export const Input = styled.input`
   color: #ffffff;
-  background-color: #1c2e38;
+  background-color: #103141;
   border: 2px solid #315162;
   border-radius: 10px;
   font-size: 17px;
@@ -51,7 +50,7 @@ export const TextArea = styled.textarea`
   color: #ffffff;
   font-family: monospace;
   font-size: 17px;
-  background-color: #1c2e38;
+  background-color: #103141;
   border: 2px solid #315162;
   border-radius: 10px;
   padding-top: 10px;
@@ -67,9 +66,7 @@ export const Submit = styled.button`
   justify-self: center;
   font-family: monospace;
   color: #fff;
-  //background-color: #2c5282;
-  //background-color: #28381c;
-  background-color: #1c2e38;
+  background-color: #103141;
   border: none;
   display: block;
   width: 200px;
@@ -80,8 +77,6 @@ export const Submit = styled.button`
   text-decoration: none;
   transition-duration: 0.5s;
   &:hover {
-    //background-color: #2a4365;
-    //background-color: #26291c;
     background-color: #315162;
     cursor: pointer;
   }
@@ -104,8 +99,6 @@ export const DivDiet = styled.div`
 `;
 
 export const ErrorContainer = styled.div`
-  /* display: flex;
-  flex-direction: row; */
   color: #ffffff;
 `;
 

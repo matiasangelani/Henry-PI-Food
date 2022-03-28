@@ -17,9 +17,6 @@ export const NumberList = styled.ul`
 `;
 
 export const NumberItem = styled.li`
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   list-style: none;
   width: 50px;
   height: 50px;

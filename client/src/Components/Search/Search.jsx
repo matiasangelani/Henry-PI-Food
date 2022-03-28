@@ -15,12 +15,13 @@ const Search = () => {
       ...input,
       search: e.target.value,
     });
-    console.log(input);
   };
 
-  // useEffect(() => {
-  //   didMountRef.current ? dispatch(getSearchRecipes(input.search)) : didMountRef.current =true
-  // }, [dispatch, input]);
+  useEffect(() => {
+    didMountRef.current
+      ? dispatch(getSearchRecipes(input.search))
+      : (didMountRef.current = true);
+  }, [dispatch, input]);
 
   return (
     <InputSearch

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import imgNotFound from '../../utils/img/FoodNotFound.png';
 import {
   RecipeContainer,
   ImageContainer,
@@ -11,19 +13,24 @@ import {
 } from './RecipeStyled';
 
 const Recipe = ({ image, title, diets, id }) => {
+  const recipes = useSelector((state) => state.recipes);
   let key = 0;
   return (
     <RecipeContainer>
       <Link to={`/recipe/${id}`}>
         <ImageContainer>
-          <Image src={image} alt='img' />
+          {image ? (
+            <Image src={image} alt='img' />
+          ) : (
+            <Image src={imgNotFound} alt='img' />
+          )}
         </ImageContainer>
       </Link>
 
       <TextContainer>
         <RecipeTitle> {title} </RecipeTitle>
         <DietsContainer>
-          {diets.map((d) => {
+          {diets?.map((d) => {
             const split = d.split(' ');
 
             for (let i = 0; i < split.length; i++)
