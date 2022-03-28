@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
       `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`,
       {
         params: {
-          number: 9,
+          number: 15,
         },
       }
     );
@@ -32,14 +32,11 @@ router.get('/', async (req, res) => {
       };
     });
 
-    console.log('index', recipes);
-
     const response = [...data.results, ...recipes];
-    //console.log('index2', response);
 
     res.json(response);
   } catch (error) {
-    res.json({ msg: error });
+    res.json(error);
   }
 });
 

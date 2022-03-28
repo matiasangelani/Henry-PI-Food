@@ -24,7 +24,6 @@ router.get('/', async (req, res) => {
   ];
 
   diets.forEach(async (d) => {
-    //console.log('FOREACH', d.name);
     try {
       await Diet.findOrCreate({
         where: {
@@ -40,10 +39,9 @@ router.get('/', async (req, res) => {
     let dbDiets = await Diet.findAll();
     while (dbDiets.length !== diets.length) dbDiets = await Diet.findAll();
 
-    //console.log('FINDALL', dbDiets);
     res.json(dbDiets);
   } catch (error) {
-    console.log(error);
+    res.json(error);
   }
 });
 

@@ -38,22 +38,19 @@ router.get('/:idRecipe', async (req, res) => {
   const { idRecipe } = req.params;
   const { created } = req.query;
 
-  console.log(req.query);
   try {
     if (created) {
       let response = await Recipe.findByPk(idRecipe, {
         include: Diet,
       });
-      console.log(
-        '🚀 ~ file: recipes.js ~ line 47 ~ router.get ~ response',
-        response
-      );
 
       response = response.toJSON();
       response = {
         ...response,
         diets: response.diets.map((d) => d.name),
       };
+
+      console.log(response);
 
       res.json(response);
     } else {
@@ -85,32 +82,5 @@ router.get('/:idRecipe', async (req, res) => {
     res.json({ msg: error });
   }
 });
-
-// router.post('/', async (req, res) => {
-//   const { name, dishSummary, points, healthy, instructions, diets } = req.body;
-
-//   try {
-//     const recipe = await Recipe.create({
-//       title: name,
-//       summary: dishSummary,
-//       weightWatcherSmartPoints: points,
-//       healthScore: healthy,
-//       analyzedInstructions: instructions,
-//     });
-
-//     const dbDiets = await Diet.findAll();
-
-//     const matchDiets = await dbDiets.filter((d) => {
-//       const diet = d.toJSON();
-//       if (diets.includes(diet.name)) return d;
-//     });
-
-//     await recipe.addDiets(matchDiets);
-
-//     res.json({ msg: 'Instance created' });
-//   } catch (error) {
-//     res.json({ msg: error });
-//   }
-// });
 
 module.exports = router;

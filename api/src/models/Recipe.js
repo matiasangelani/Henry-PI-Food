@@ -29,6 +29,12 @@ module.exports = (sequelize) => {
           return true;
         },
       },
+      // image: {
+      //   type: DataTypes.VIRTUAL,
+      //   get() {
+      //     return img2;
+      //   },
+      // },
     },
     {
       timestamps: false,

@@ -1,7 +1,5 @@
 require('dotenv').config();
 const router = require('express').Router();
-const axios = require('axios').default;
-const { API_KEY } = process.env;
 const { Recipe, Diet } = require('../db');
 
 router.post('/', async (req, res) => {
