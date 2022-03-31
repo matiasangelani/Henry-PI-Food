@@ -123,7 +123,6 @@ const rootReducer = (state = initialState, action) => {
               }
 
               if (countTrueProperties === count) {
-                //console.log("OK");
                 return true;
               }
               return false;

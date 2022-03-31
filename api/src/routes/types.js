@@ -1,7 +1,5 @@
 require('dotenv').config();
 const router = require('express').Router();
-const axios = require('axios').default;
-const { API_KEY } = process.env;
 const { Diet } = require('../db');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');

@@ -46,14 +46,13 @@ const Home = () => {
         <OrderRecipes />
         <FilterRecipes />
         <Link to={`/recipes/create`}>
-          <ButtonCreate> Create Recipe</ButtonCreate>
+          <ButtonCreate>Create Recipe</ButtonCreate>
         </Link>
       </Aside>
       <Section>
         {!getRecipes.length ? (
           <LoadingContainer />
         ) : (
-          // : !getRecipes.length ? (<LoadingContainer />)
           <Recipes currentRecipes={currentRecipes} />
         )}
 
